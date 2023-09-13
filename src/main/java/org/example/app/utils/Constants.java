@@ -5,7 +5,7 @@ public final class Constants {
     public final static String DB_DRIVER = "jdbc:sqlite:";
     public final static String DB_BASE_URL = "src/main/resources/database/";
     public final static String DB_NAME = "users_db.db";
-    public final static String TABLE_CONTACTS = "users";
+    public final static String TABLE_USERS = "users";
     public final static String DB_ABSENT_MSG = "\n>> No database!";
     public final static String DATA_ABSENT_MSG = "\n>> No data!";
     public final static String DATA_INSERT_MSG = "\n>> Created.";
