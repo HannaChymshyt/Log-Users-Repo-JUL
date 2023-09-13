@@ -52,7 +52,7 @@ public class UserCreateService {
             errors.put("phone", Constants.WRONG_PHONE_MSG);
 
         if (EmailValidator.isEmailValid(data[2].trim()))
-            errors.put("phone", Constants.WRONG_EMAIL_MSG);
+            errors.put("email", Constants.WRONG_EMAIL_MSG);
 
         return errors;
     }
