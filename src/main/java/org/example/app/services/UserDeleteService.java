@@ -12,10 +12,15 @@ import org.example.app.utils.IdValidator;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class UserDeleteService {
 
     UserDeleteRepository repository;
 
+    private final static Logger LOGGER =
+            Logger.getLogger(UserDeleteService.class.getName());
     public UserDeleteService(UserDeleteRepository repository) {
         this.repository = repository;
     }
@@ -25,6 +30,7 @@ public class UserDeleteService {
             try {
                 throw new DBException(Constants.DB_ABSENT_MSG);
             } catch (DBException e) {
+                LOGGER.log(Level.SEVERE, Constants.LOG_DB_ABSENT_MSG);
                 return e.getMessage();
             }
         }
@@ -35,6 +41,7 @@ public class UserDeleteService {
             try {
                 throw new DeleteException("Check inputs for delete data.", errors);
             } catch (DeleteException ue) {
+                LOGGER.log(Level.WARNING, Constants.LOG_DATA_INPTS_WRONG_MSG);
                 return ue.getErrors(errors);
             }
         }

@@ -9,7 +9,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class UserReadRepository {
+
+    private static final Logger LOGGER =
+            Logger.getLogger(UserReadRepository.class.getName());
 
     public List<User> readUsers() {
 
@@ -30,6 +36,7 @@ public class UserReadRepository {
             }
             return list;
         } catch (SQLException e) {
+            LOGGER.log(Level.WARNING, Constants.LOG_DB_ERROR_MSG);
             return Collections.emptyList();
         }
     }

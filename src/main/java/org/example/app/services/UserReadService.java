@@ -9,9 +9,15 @@ import org.example.app.utils.Constants;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class UserReadService {
 
     UserReadRepository repository;
+
+    private static final Logger LOGGER =
+            Logger.getLogger(UserReadService.class.getName());
 
     public UserReadService(UserReadRepository repository) {
         this.repository = repository;
@@ -22,6 +28,7 @@ public class UserReadService {
             try {
                 throw new DBException(Constants.DB_ABSENT_MSG);
             } catch (DBException e) {
+                LOGGER.log(Level.SEVERE, Constants.LOG_DB_ABSENT_MSG);
                 return e.getMessage();
             }
         }
@@ -46,9 +53,11 @@ public class UserReadService {
                 );
                 return stringBuilder.toString();
             } else {
+                LOGGER.log(Level.WARNING, Constants.LOG_DATA_ABSENT_MSG);
                 return Constants.DATA_ABSENT_MSG;
             }
         } else {
+            LOGGER.log(Level.WARNING, Constants.LOG_DATA_ABSENT_MSG);
             return Constants.DATA_ABSENT_MSG;
         }
     }

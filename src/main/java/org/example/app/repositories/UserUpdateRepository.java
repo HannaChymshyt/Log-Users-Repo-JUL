@@ -7,7 +7,13 @@ import org.example.app.utils.Constants;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class UserUpdateRepository {
+
+    private static final Logger LOGGER =
+            Logger.getLogger(UserUpdateRepository.class.getName());
 
     public String updateUser(User user) {
 
@@ -18,6 +24,7 @@ public class UserUpdateRepository {
             pstmt.executeUpdate();
             return Constants.DATA_UPDATE_MSG;
         } catch (SQLException e) {
+            LOGGER.log(Level.WARNING, Constants.LOG_DB_ERROR_MSG);
             return e.getMessage();
         }
     }

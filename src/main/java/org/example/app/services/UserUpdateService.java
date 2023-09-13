@@ -10,10 +10,15 @@ import org.example.app.utils.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class UserUpdateService {
 
     UserUpdateRepository repository;
 
+    private static final Logger LOGGER =
+            Logger.getLogger(UserUpdateService.class.getName());
     public UserUpdateService(UserUpdateRepository repository) {
         this.repository = repository;
     }
@@ -23,6 +28,7 @@ public class UserUpdateService {
             try {
                 throw new DBException(Constants.DB_ABSENT_MSG);
             } catch (DBException e) {
+                LOGGER.log(Level.SEVERE, Constants.LOG_DB_ABSENT_MSG);
                 return e.getMessage();
             }
         }
@@ -33,6 +39,7 @@ public class UserUpdateService {
             try {
                 throw new UpdateException("Check inputs for update data.", errors);
             } catch (UpdateException ue) {
+                LOGGER.log(Level.WARNING, Constants.LOG_DATA_INPTS_WRONG_MSG);
                 return ue.getErrors(errors);
             }
         }
